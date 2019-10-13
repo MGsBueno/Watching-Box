@@ -9,10 +9,12 @@ import {
     Alert
 } from 'react-native';
 
+import { tryLogin} from '../actions';
+import { connect } from 'react-redux';
 import FormRow from '../components/FormRow';
 import * as firebase from "firebase";
 
-export default class LoginPage extends React.Component {
+class LoginPage extends React.Component {
     constructor(props) {
         super(props);
     
@@ -51,34 +53,9 @@ export default class LoginPage extends React.Component {
 
     tryLogin(){
         this.setState({ isLoading: true, message: '' });
-        const { user, password } = this.state;
-        
-        /* firebase rules */
-        firebase
-            .auth()
-            .signInWithEmailAndPassword(user, password)
-            .then(user =>{
-                this.setState({message: 'Sucesso!'})
-                
-
-                
-            })
-            .catch(error =>{
-                /* allert code */
-                if (error.code){
-                    Alert.alert(
-                        '','Usuário ou senha inválido'
-
-                    )
-
-                }
-
-                this.setState({
-                    message: this.getMessageByErrorCode(error.code
-                )})
-                console.log('usuario invalido!', error )  
-            })
-            .then(() => this.setState({isLoading: false}));   
+        const { user: email, password } = this.state;
+        this.props.tryLogin({ email,password })
+          
     }
 
     renderLoginButton (){
@@ -170,3 +147,5 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
     },
 })
+
+export default connect(null, { tryLogin })(LoginPage) 
