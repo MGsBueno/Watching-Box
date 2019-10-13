@@ -1,51 +1,20 @@
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import LoginScreen from './src/pages/LoginScreen';
-import SubscribeScreen from './src/pages/SubscribeScreen'
+import React from 'react';
+import Router from './src/Router';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware} from 'redux';
+import reduxThunk from 'redux-thunk';
+import rootReducer from './src/reducers';
+import { composeWithDevTools } from 'remote-redux-devtools';
 
-/*Text Login*/
-const AppNavigator = createStackNavigator({
-  'Login': {
-    screen: LoginScreen,
-    navigationOptions: {
-      title: 'Welcome to Watching Box',
-      headerTintColor : 'white',
-      headerStyle: {
-        backgroundColor: '#9400D3',
-        borderBottomWidht: 1,
-        borderBottomCollor: 'C5C5C5'
-      },  
-      headerTitleStyle: {
-        color: 'white',
-        fontSize: 26,
-      },
-    }
-  },
-  'Subscribe':{
-    screen: SubscribeScreen,
-  },
-  
-},
-{
-    defaultNavigationOptions: {
-      title: "Watching Box",
-      
-      headerTintColor : 'white',
-      headerStyle: {
-        
-        backgroundColor: '#9400D3',
-        borderBottomWidht: 1,
-        borderBottomCollor: 'C5C5C5'
-      },
-      headerTitleStyle: {
-        color: 'white',
-        fontSize: 30,
-      },
 
-  },
-  
-});
+const store = createStore(rootReducer, composeWithDevTools(
+    applyMiddleware(reduxThunk)
+    ));
 
-const AppContainer = createAppContainer (AppNavigator);
 
-export default AppContainer;
+const SeriesApp = prop => (
+    <Provider store = {store}>
+        <Router/>
+    </Provider> 
+);
+export default SeriesApp;
