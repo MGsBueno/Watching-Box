@@ -6,7 +6,6 @@ import reduxThunk from 'redux-thunk';
 import rootReducer from './src/reducers';
 import { composeWithDevTools } from 'remote-redux-devtools';
 
-
 const store = createStore(rootReducer, composeWithDevTools(
     applyMiddleware(reduxThunk)
     ));

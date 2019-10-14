@@ -1,47 +1,30 @@
-const USER_LOGIN = 'USER_LOGIN';
-const USER_LOGOUT = 'USER_LOGOUT'; 
+import firebase from 'firebase';
+import { Alert } from 'react-native';
+export const USER_LOGIN_SUCESS = 'USER_LOGIN_SUCESS';
+export const USER_LOGOUT = 'USER_LOGOUT'; 
 
-const userLogin = user => ({
-    type: USER_LOGIN,
+
+const userLoginSucess = user => ({
+    type: USER_LOGIN_SUCESS,
     user
 });
 
-const userLout = user => ({
+const userLogout = () => ({
     type: USER_LOGOUT,
 });
 
-export const tryLogin = (user, password) => dispatch => {
-    dispatch(userLogin(user));
-    dispatch(userLout()); 
+export const tryLogin = ({email, password}) => dispatch => {
+    /* firebase rules */
+    return firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(user =>{
+            const action= userLoginSucess(user);
+            dispatch(action);  
+        })
 
-
-
-     /* firebase rules */
-     firebase
-     .auth()
-     .signInWithEmailAndPassword(user, password)
-     .then(user =>{
-         this.setState({message: 'Sucesso!'})
-         
-
-         
-     })
-     .catch(error =>{
-         /* allert code */
-         if (error.code){
-             Alert.alert(
-                 '','Usuário ou senha inválido'
-
-             )
-
-         }
-
-         this.setState({
-             message: this.getMessageByErrorCode(error.code
-         )})
-         console.log('usuario invalido!', error )  
-     })
-     .then(() => this.setState({isLoading: false}));
-
+        .catch(error =>{
+                return Alert.alert( 'Usuário ou senha inválido' )
+                }  
+        )
 }
-

@@ -54,8 +54,11 @@ class LoginPage extends React.Component {
     tryLogin(){
         this.setState({ isLoading: true, message: '' });
         const { user: email, password } = this.state;
-        this.props.tryLogin({ email,password })
-          
+        this.props.tryLogin({ email, password })
+            .then(() =>{
+                this.setState({ message: 'Sucesso!' })
+                this.props.navigation.replace('Main')
+          } )
     }
 
     renderLoginButton (){
@@ -136,7 +139,7 @@ class LoginPage extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     container:{
         paddingLeft: 10,
         paddingRight: 10,
