@@ -28,3 +28,23 @@ export const tryLogin = ({email, password}) => dispatch => {
                 }  
         )
 }
+
+export const trySubscribe = ({ email,password }) => disatch =>{
+    return firebase 
+            .auth()
+            .createUserWithEmailAndPassword(email,password)
+            .then(
+                Alert.alert("usuário Criado com Sucesso!")
+            )
+            .catch(error=>{
+                if (error.code === 'auth/weak-password') {
+                    Alert.alert('Senha muito fraca', 'a senha precisa ter pelo menos 6 digitos');
+               }
+               if (error.code === 'auth/email-already-in-use') {
+                Alert.alert('Usuário existente','tente outro email');
+               }
+               if (error.code === 'auth/invalid-email') {
+                Alert.alert('email inválido','use um formato de email válido');
+               }
+            })
+}

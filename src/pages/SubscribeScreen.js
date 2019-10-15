@@ -1,7 +1,8 @@
 import React from 'react';
-import * as firebase from "firebase";
 import FormRow from '../components/FormRow';
 import styles from './LoginScreen';
+import { connect } from 'react-redux';
+import { trySubscribe } from '../actions';
 import { 
   View, 
   TextInput, 
@@ -9,13 +10,10 @@ import {
   ActivityIndicator,
   StyleSheet,
 } from 'react-native';
-
-
-
-
-export default class SubscribeScreen extends React.Component{
+class SubscribePage extends React.Component{
   constructor(props) {
     super(props)
+    
     this.state = {
         user: '',
         password: '',
@@ -30,23 +28,28 @@ export default class SubscribeScreen extends React.Component{
         [field]: value 
     }); 
   }
+
+  trySubscribe(){
+    this.setState({ isLoading: true, message: '' });
+    const { user: email, password } = this.state;
+    this.props.trySubscribe({ email, password })
+      .then(() =>{
+        this.setState({ message: 'Sucesso!' })
+        this.props.navigation.replace('Main');
+      })
+  }
+
   renderSubscribeButton (){
     if(this.isLoading){
         return <ActivityIndicator/>
     }
-    //Necessário transformar em promise o cadastro
     return(<Button
         title = "Cadastro"
-        onPress={() => 
-          firebase 
-          .auth()
-          .createUserWithEmailAndPassword(this.state.user,this.state.password)
-        
-        }
+        onPress={() => {
+        this.trySubscribe();
+        }}
     />);
 }
-
-
   render(){
     return(
       <View style={styles.container}>
@@ -76,5 +79,5 @@ export default class SubscribeScreen extends React.Component{
     )
   }
 }
-// Firebase Subscripe login
-// onPress() =>
+
+export default connect(null, { trySubscribe })(SubscribePage) 

@@ -6,14 +6,11 @@ import {
     Button, 
     StyleSheet, 
     ActivityIndicator,
-    Alert
 } from 'react-native';
-
-import { tryLogin} from '../actions';
+import firebase from '../components/configuations'
+import { tryLogin } from '../actions';
 import { connect } from 'react-redux';
 import FormRow from '../components/FormRow';
-import * as firebase from "firebase";
-
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
@@ -28,19 +25,7 @@ class LoginPage extends React.Component {
 
 /*Firebase login code */
     componentDidMount(){
-        const firebaseConfig = {
-            apiKey: "AIzaSyAVHiETBoRqLfj_cIK5WliCVPPjGB6IYP8",
-            authDomain: "watching-box-01.firebaseapp.com",
-            databaseURL: "https://watching-box-01.firebaseio.com",
-            projectId: "watching-box-01",
-            storageBucket: "",
-            messagingSenderId: "410240569214",
-            appId: "1:410240569214:web:a2826cf01aa6503358ed2f"
-          };
-          // Initialize Firebase
-          firebase.initializeApp(firebaseConfig);
-          
-          
+        firebase;   
     }
 
     
@@ -57,7 +42,7 @@ class LoginPage extends React.Component {
         this.props.tryLogin({ email, password })
             .then(() =>{
                 this.setState({ message: 'Sucesso!' })
-                this.props.navigation.replace('Main')
+                this.props.navigation.replace('Main');
           } )
     }
 
