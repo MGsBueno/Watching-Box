@@ -1,7 +1,7 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import LoginScreen from './pages/LoginScreen';
-import MainScreen from './pages/LoginScreen';
+import MainScreen from './pages/MainScreen';
 import SubscribeScreen from './pages/SubscribeScreen'
 
 
@@ -22,6 +22,7 @@ const AppNavigator = createStackNavigator({
         fontSize: 26,
       },
     }
+    
   },
   'Subscribe':{
     screen: SubscribeScreen,
