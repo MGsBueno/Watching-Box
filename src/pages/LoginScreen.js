@@ -67,17 +67,7 @@ class LoginPage extends React.Component {
         />);
     }
 
-    getMessageByErrorCode(errorCode){
-        switch(errorCode){
-            case 'auth/wrong-password':
-                return 'Senha incorreta'
-            case 'auth/user-not-found':
-                return 'Usuário não encontrado'
-            default:
-                return 'Usuário incorreto'
-        }
     
-    }
 
     renderMessage(){
         const { message } = this.state;

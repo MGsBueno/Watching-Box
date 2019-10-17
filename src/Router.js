@@ -40,8 +40,8 @@ const AppNavigator = createStackNavigator({
     }
   },
   'Main':{
-    screen: MainScreen
-  },
+    screen: MainScreen,
+  }
   
 },
 {

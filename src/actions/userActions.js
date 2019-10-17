@@ -13,6 +13,28 @@ const userLogout = () => ({
     type: USER_LOGOUT,
 });
 
+function getMessageByErrorCode(errorCode){
+    switch(errorCode){
+        //Login
+        case 'auth/wrong-password':
+            return 'Senha incorreta'
+        case 'auth/user-not-found':
+            return 'Usuário não encontrado'
+        //Subscribe
+        case 'auth/weak-password':
+            return 'Senha muito fraca', 'a senha precisa ter pelo menos 6 digitos'
+        case 'auth/email-already-in-use':
+            return 'Usuário existente','tente outro email'
+        case 'auth/invalid-email':
+            return 'email inválido','use um formato de email válido'
+        //default
+        default:
+            return 'Usuário incorreto'
+    }
+
+}
+
+
 export const tryLogin = ({email, password}) => dispatch => {
     /* firebase rules */
     return firebase
@@ -24,7 +46,7 @@ export const tryLogin = ({email, password}) => dispatch => {
         })
 
         .catch(error =>{
-                return Alert.alert( 'Usuário ou senha inválido' )
+                return Alert.alert( getMessageByErrorCode(error.code) )
                 }  
         )
 }
@@ -33,18 +55,7 @@ export const trySubscribe = ({ email,password }) => disatch =>{
     return firebase 
             .auth()
             .createUserWithEmailAndPassword(email,password)
-            .then(
-                Alert.alert("usuário Criado com Sucesso!")
-            )
             .catch(error=>{
-                if (error.code === 'auth/weak-password') {
-                    Alert.alert('Senha muito fraca', 'a senha precisa ter pelo menos 6 digitos');
-               }
-               if (error.code === 'auth/email-already-in-use') {
-                Alert.alert('Usuário existente','tente outro email');
-               }
-               if (error.code === 'auth/invalid-email') {
-                Alert.alert('email inválido','use um formato de email válido');
-               }
+                return Alert.alert ( getMessageByErrorCode(error.code) )
             })
 }
