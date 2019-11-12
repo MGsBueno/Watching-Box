@@ -27,6 +27,8 @@ function getMessageByErrorCode(errorCode){
             return 'Usuário existente','tente outro email'
         case 'auth/invalid-email':
             return 'email inválido','use um formato de email válido'
+        case 'auth/network-request-failed':
+            return 'sem conexao com a internet, tente mais tarde'
         //default
         default:
             return 'Usuário incorreto'

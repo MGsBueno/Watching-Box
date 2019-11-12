@@ -40,7 +40,7 @@ class LoginPage extends React.Component {
         this.setState({ isLoading: true, message: '' });
         const { user: email, password } = this.state;
         this.props.tryLogin({ email, password })
-            .then(() =>{
+            .then( user =>{
                 this.setState({ message: 'Sucesso!' })
                 this.props.navigation.replace('Main');
           } )
@@ -52,6 +52,7 @@ class LoginPage extends React.Component {
         }
         return(<Button
             title = "LOGIN"
+            color ='orange'
             onPress={() => this.tryLogin()}
         />);
     }
@@ -89,6 +90,8 @@ class LoginPage extends React.Component {
                     style={styles.input}
                     placeholder = 'Usuário' 
                     value={this.state.user}
+                    keyboardType='email-address'
+                    autoCapitalize = 'none'
                     onChangeText={value => this.onChangeHandler('user', value)}
                     />
                     

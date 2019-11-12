@@ -33,7 +33,7 @@ class SubscribePage extends React.Component{
     this.setState({ isLoading: true, message: '' });
     const { user: email, password } = this.state;
     this.props.trySubscribe({ email, password })
-      .then(() =>{
+      .then( user =>{
         this.setState({ message: 'Sucesso!' })
         this.props.navigation.replace('Main');
       })
@@ -47,6 +47,7 @@ class SubscribePage extends React.Component{
         title = "Cadastro"
         onPress={() => {
         this.trySubscribe();
+      
         }}
     />);
 }
@@ -59,6 +60,8 @@ class SubscribePage extends React.Component{
           style={styles.input}
           placeholder = 'Usuário' 
           value={this.state.user}
+          keyboardType='email-address'
+          autoCapitalize = 'none'
           onChangeText={value => this.onChangeHandler('user', value)}
           />
           
@@ -81,3 +84,4 @@ class SubscribePage extends React.Component{
 }
 
 export default connect(null, { trySubscribe })(SubscribePage) 
+

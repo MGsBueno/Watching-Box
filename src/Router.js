@@ -1,12 +1,17 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import LoginScreen from './pages/LoginScreen';
-import MainScreen from './pages/LoginScreen';
+import MainScreen from './pages/MainScreen';
 import SubscribeScreen from './pages/SubscribeScreen'
 
 
 /*Text Login*/
 const AppNavigator = createStackNavigator({
+  
+  'Main':{
+    screen: MainScreen,
+  },
+  
   'Login': {
     screen: LoginScreen,
     navigationOptions: {
@@ -39,10 +44,6 @@ const AppNavigator = createStackNavigator({
       },
     }
   },
-  'Main':{
-    screen: MainScreen,
-  }
-  
 },
 {
     defaultNavigationOptions: {
