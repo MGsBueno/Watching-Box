@@ -19,6 +19,7 @@ class SubscribePage extends React.Component{
         password: '',
         isLoading: false,
         message:'',
+        Loged: false,
     }
   }
 

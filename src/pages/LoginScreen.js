@@ -40,10 +40,11 @@ class LoginPage extends React.Component {
         this.setState({ isLoading: true, message: '' });
         const { user: email, password } = this.state;
         this.props.tryLogin({ email, password })
+
             .then( user =>{
                 this.setState({ message: 'Sucesso!' })
                 this.props.navigation.replace('Main');
-          } )
+                } )
     }
 
     renderLoginButton (){
@@ -129,4 +130,4 @@ export const styles = StyleSheet.create({
     },
 })
 
-export default connect(null, { tryLogin })(LoginPage) 
+export default connect(null, { tryLogin })(LoginPage)   

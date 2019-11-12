@@ -27,6 +27,7 @@ const AppNavigator = createStackNavigator({
         fontSize: 26,
       },
     }
+    
   },
   'Subscribe':{
     screen: SubscribeScreen,

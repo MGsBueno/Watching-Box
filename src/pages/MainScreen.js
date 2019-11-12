@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { StyleSheet, View, Text, flatList } from 'react-native';
 import Series from '../Series.json';
 import { FlatList } from 'react-native-gesture-handler';
