@@ -4,11 +4,14 @@ import {
     Text, 
     StyleSheet, 
     Dimensions,
-    Image
+    Image,
+    TouchableOpacity
 } from 'react-native';
 
-const Card = ({ serie }) => (
-    <View style = {styles.container}>
+const Card = ({ serie, onNavigate }) => (
+    <TouchableOpacity 
+    onPress={onNavigate}
+    style = {styles.container}>
         <View style = {styles.card}>
             <Image style = {styles.card}
                 source = {{
@@ -18,19 +21,18 @@ const Card = ({ serie }) => (
                 resizeMode = 'stretch'
             />
         </View>
-    </View>
+    </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
     container:{
         margin: 2,
-        width:'33%',
-        height: Dimensions.get('window').width /2 
+        height: Dimensions.get('window').width /3 
     },
     card:{
         flex: 1,
-        borderWidth:1,
-        height: Dimensions.get('window').width /2   
+        borderWidth:2
+           
     }
 });
 

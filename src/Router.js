@@ -2,7 +2,8 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import LoginScreen from './pages/LoginScreen';
 import MainScreen from './pages/MainScreen';
-import SubscribeScreen from './pages/SubscribeScreen'
+import SubscribeScreen from './pages/SubscribeScreen';
+import SerieDetailPage from './pages/SerieDetailPage';
 
 
 /*Text Login*/
@@ -45,6 +46,15 @@ const AppNavigator = createStackNavigator({
       },
     }
   },
+  'SerieDetail':{
+    screen:SerieDetailPage,
+    navigationOptions: ({ navigation }) => {
+      const { serie } = navigation.state.params;
+      return{
+      title: serie.title,
+      }
+    },
+  },
 },
 {
     defaultNavigationOptions: {
@@ -53,11 +63,12 @@ const AppNavigator = createStackNavigator({
       headerTintColor : 'white',
       headerStyle: {
         
-        backgroundColor: '#9400D3',
+        backgroundColor: '#181818',
         borderBottomWidht: 1,
         borderBottomCollor: 'C5C5C5'
       },
       headerTitleStyle: {
+        padding:'20%',
         color: 'white',
         fontSize: 30,
       },

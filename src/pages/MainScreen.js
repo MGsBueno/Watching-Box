@@ -11,11 +11,14 @@ const SeriesPage = props => (
             data = { Series }
             renderItem={({ item }) => (
             <View>
-                <Card serie ={item} />
+                <Card serie ={item} 
+                onNavigate = {() => props.navigation.navigate('SerieDetail', { serie: item })}
+                />
             </View>
             )}
             keyExtractor = {item => item.id.toString()}
-            numColumns = {2}
+            numColumns = {3}
+            
         />
     </View>
 );
