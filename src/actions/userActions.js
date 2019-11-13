@@ -4,7 +4,7 @@ export const USER_LOGIN_SUCESS = 'USER_LOGIN_SUCESS';
 export const USER_LOGOUT = 'USER_LOGOUT'; 
 
 
-const userLoginSucess = user => ({
+ const userLoginSucess = user => ({
     type: USER_LOGIN_SUCESS,
     user
 });
@@ -43,8 +43,9 @@ export const tryLogin = ({email, password}) => dispatch => {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(user =>{
-            const action= userLoginSucess(user);
-            dispatch(action);  
+            const action = userLoginSucess(user);
+            dispatch(action);
+            return user; 
         })
 
         .catch(error =>{

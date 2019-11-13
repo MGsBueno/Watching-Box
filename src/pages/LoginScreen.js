@@ -27,8 +27,6 @@ class LoginPage extends React.Component {
     componentDidMount(){
         firebase;   
     }
-
-    
     //functions render form
     onChangeHandler(field, value){
         this.setState({ 
@@ -40,11 +38,10 @@ class LoginPage extends React.Component {
         this.setState({ isLoading: true, message: '' });
         const { user: email, password } = this.state;
         this.props.tryLogin({ email, password })
-
             .then( user =>{
-                this.setState({ message: 'Sucesso!' })
+                if (user){
                 this.props.navigation.replace('Main');
-                } )
+            }} )
     }
 
     renderLoginButton (){
@@ -68,8 +65,6 @@ class LoginPage extends React.Component {
             onPress={() => this.props.navigation.navigate('Subscribe')}
         />);
     }
-
-    
 
     renderMessage(){
         const { message } = this.state;
@@ -111,8 +106,6 @@ class LoginPage extends React.Component {
                 { this.renderLoginButton() }
                 { this.renderSubscribeButton()}
                 { this.renderMessage() }
-                
-                
             </View>
         )
     }
@@ -122,6 +115,7 @@ export const styles = StyleSheet.create({
     container:{
         paddingLeft: 10,
         paddingRight: 10,
+        flex: 1
     },
     input:{
         paddingLeft: 5,

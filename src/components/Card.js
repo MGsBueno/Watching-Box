@@ -31,8 +31,7 @@ const styles = StyleSheet.create({
     },
     card:{
         flex: 1,
-        borderWidth:2
-           
+        borderWidth:2   
     }
 });
 

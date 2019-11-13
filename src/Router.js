@@ -8,13 +8,9 @@ import SerieDetailPage from './pages/SerieDetailPage';
 
 /*Text Login*/
 const AppNavigator = createStackNavigator({
-  
-  'Main':{
-    screen: MainScreen,
-  },
-  
   'Login': {
     screen: LoginScreen,
+    
     navigationOptions: {
       title: 'Bem vindo a Watching Box',
       headerTintColor : 'white',
@@ -45,6 +41,9 @@ const AppNavigator = createStackNavigator({
         fontSize: 26,
       },
     }
+  }, 
+  'Main':{
+    screen: MainScreen,
   },
   'SerieDetail':{
     screen:SerieDetailPage,
@@ -59,10 +58,8 @@ const AppNavigator = createStackNavigator({
 {
     defaultNavigationOptions: {
       title: "Watching Box",
-      
       headerTintColor : 'white',
       headerStyle: {
-        
         backgroundColor: '#181818',
         borderBottomWidht: 1,
         borderBottomCollor: 'C5C5C5'
