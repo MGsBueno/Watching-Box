@@ -8,6 +8,9 @@ import SerieDetailPage from './pages/SerieDetailPage';
 
 /*Text Login*/
 const AppNavigator = createStackNavigator({
+  'Main':{
+    screen: MainScreen,
+  },
   'Login': {
     screen: LoginScreen,
     
@@ -42,9 +45,7 @@ const AppNavigator = createStackNavigator({
       },
     }
   }, 
-  'Main':{
-    screen: MainScreen,
-  },
+  
   'SerieDetail':{
     screen:SerieDetailPage,
     navigationOptions: ({ navigation }) => {

@@ -1,24 +1,54 @@
 import React from 'react';
-import { ScrollView, Text, Image, StyleSheet } from 'react-native';
+import { ScrollView, Text, Image, StyleSheet, Button, ActivityIndicator, TouchableHighlight, View } from 'react-native';
 import Row from '../components/Row';
 import LongText from '../components/LongText';
 
 class SerieDetailPage extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            FavoritedMsg: 'ADD Favoritos',
+    }}
+   
+    changeState = () =>{
+        if(this.state.FavoritedMsg =='ADD Favoritos'){
+            this.setState({
+            FavoritedMsg : 'Favorito'
+        });
+        }
+        else{
+        this.setState({
+            FavoritedMsg : 'ADD Favoritos'
+        });
+        } 
+    }   
+
     render(){
         const { serie } = this.props.navigation.state.params;
         return(
-            <ScrollView>
-                <Image
-                style={styles.image} 
-                source={{
-                    uri: serie.img
-                }}
-                />
-                <Row label='Título' content ={serie.title}/>
-                <Row label='Gênero' content ={serie.gender}/>
-                <Row label='Nota' content ={serie.rate}/>
-                <LongText label='Descrição' content ={serie.description}/>
-            </ScrollView>
+                <ScrollView>
+                    <Image
+                    style={styles.image} 
+                    source={{
+                        uri: serie.img
+                    }}
+                    />
+                    
+                
+                <TouchableHighlight onPress={ this.changeState }>
+                    <View style={
+                        this.state.FavoritedMsg=== 'ADD Favoritos'
+                        ? styles.buttonO : styles.buttonP}>
+                <Text style={styles.buttonText}>{ this.state.FavoritedMsg }</Text>
+                    </View>
+                </TouchableHighlight>
+          
+                    
+                    <Row label='Título' content ={serie.title}/>
+                    <Row label='Gênero' content ={serie.gender}/>
+                    <Row label='Nota' content ={serie.rate}/>
+                    <LongText label='Descrição' content ={serie.description}/>
+                </ScrollView>
         )
     }
 }
@@ -26,9 +56,33 @@ class SerieDetailPage extends React.Component {
 const styles = StyleSheet.create({
     image:{
         aspectRatio: 1.2,
+    },
+    
+    container: {
+        alignItems: 'center'
+        },
+        buttonO: {
+        alignItems: 'center',
+        backgroundColor: 'orange',
+        height: 30
+        },
+        buttonP: {
+            alignItems: 'center',
+            backgroundColor: 'purple',
+            height: 30
+            },
+        buttonText: {
+        textAlign: 'center',
+        padding: 5,
+        color: 'white',
+        fontWeight: 'bold'
     }
     
+    
 });
+
+
+  
 
 
 export default SerieDetailPage;
