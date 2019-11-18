@@ -3,8 +3,9 @@ import { createStackNavigator } from 'react-navigation-stack';
 import LoginScreen from './pages/LoginScreen';
 import MainScreen from './pages/MainScreen';
 import SubscribeScreen from './pages/SubscribeScreen';
-import SerieDetailPage from './pages/SerieDetailPage';
-
+import SerieDetailPage from './pages/SerieDetailScreen';
+import Favorite from './pages/FavoriteScreen'
+import createSerie from './pages/createSerie'
 
 /*Text Login*/
 const AppNavigator = createStackNavigator({
@@ -55,7 +56,20 @@ const AppNavigator = createStackNavigator({
       }
     },
   },
+  'Favorite':{
+    screen:Favorite,
+    navigationOptions:{
+      title: 'Favoritos',
+    }
+  },
+  'createSerie':{
+    screen:createSerie,
+    navigationOptions:{
+      title: 'Criar série',
+    }
+  },
 },
+
 {
     defaultNavigationOptions: {
       title: "Watching Box",

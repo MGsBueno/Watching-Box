@@ -14,7 +14,6 @@ import FormRow from '../components/FormRow';
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
-    
         this.state = {
             user: '',
             password: '',

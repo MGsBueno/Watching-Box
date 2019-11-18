@@ -1,7 +1,8 @@
 import React from 'react';
-import { ScrollView, Text, Image, StyleSheet, Button, ActivityIndicator, TouchableHighlight, View } from 'react-native';
+import { ScrollView, Text, Image, StyleSheet, TouchableHighlight, View } from 'react-native';
 import Row from '../components/Row';
 import LongText from '../components/LongText';
+import saveSerie from '../actions'
 
 class SerieDetailPage extends React.Component {
     constructor(props){
@@ -11,9 +12,12 @@ class SerieDetailPage extends React.Component {
     }}
    
     changeState = () =>{
+        /* TODA A LOGICA DE ADD SERIE AO FAVORITOS AQUI */
+
         if(this.state.FavoritedMsg =='ADD Favoritos'){
             this.setState({
-            FavoritedMsg : 'Favorito'
+            FavoritedMsg : 'Favorito',
+            saveSerie   
         });
         }
         else{
@@ -76,9 +80,7 @@ const styles = StyleSheet.create({
         padding: 5,
         color: 'white',
         fontWeight: 'bold'
-    }
-    
-    
+    }   
 });
 
 
