@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyleSheet, View, Text, Button, Dimensions } from 'react-native';
+import { StyleSheet, View, Button, Dimensions } from 'react-native';
 import Series from '../Series.json';
 import { FlatList } from 'react-native-gesture-handler';
 import Card from '../components/Card';
@@ -11,9 +11,9 @@ import { setField } from '../actions';
 
 
 export default class SeriesPage extends React.Component{
-    constructor(props){
-        super(props);
-            this.state = {
+    constructor(){
+        super();
+            state = {
                 search: '',
             }}
 
@@ -23,7 +23,7 @@ export default class SeriesPage extends React.Component{
         };
 
     render(){
-        const { search } = this.state;
+        const { search } = state;
             
         return(
         <View style = {styles.container}>

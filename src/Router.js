@@ -9,9 +9,7 @@ import createSerie from './pages/createSerie'
 
 /*Text Login*/
 const AppNavigator = createStackNavigator({
-  'Main':{
-    screen: MainScreen,
-  },
+  
   'Login': {
     screen: LoginScreen,
     
@@ -28,7 +26,9 @@ const AppNavigator = createStackNavigator({
         fontSize: 26,
       },
     }
-    
+  },
+  'Main':{
+    screen: MainScreen,
   },
   'Subscribe':{
     screen: SubscribeScreen,

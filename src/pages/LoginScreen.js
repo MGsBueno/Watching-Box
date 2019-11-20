@@ -44,7 +44,7 @@ class LoginPage extends React.Component {
     }
 
     renderLoginButton (){
-        if(this.isLoading){
+        if(this.state.isLoading){
             return <ActivityIndicator/>
         }
         return(<Button
@@ -102,8 +102,11 @@ class LoginPage extends React.Component {
                     secureTextEntry
                     />
                 </FormRow>
-                { this.renderLoginButton() }
-                { this.renderSubscribeButton()}
+                <View style = {styles.button}>
+                    { this.renderLoginButton() }
+                    { this.renderSubscribeButton()}
+                    
+                </View>
                 { this.renderMessage() }
             </View>
         )
