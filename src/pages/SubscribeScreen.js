@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   StyleSheet,
 } from 'react-native';
+import { BorderlessButton } from 'react-native-gesture-handler';
 class SubscribePage extends React.Component{
   constructor(props) {
     super(props)
@@ -44,8 +45,9 @@ class SubscribePage extends React.Component{
     if(this.isLoading){
         return <ActivityIndicator/>
     }
-    return(<Button
+    return(<Button style = {styles.button}
         title = "Cadastro"
+        color = "orange"
         onPress={() => {
         this.trySubscribe();
       
@@ -83,6 +85,7 @@ class SubscribePage extends React.Component{
     )
   }
 }
+
 
 export default connect(null, { trySubscribe })(SubscribePage) 
 

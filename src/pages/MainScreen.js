@@ -1,30 +1,31 @@
 import React from 'react';
 
-import { StyleSheet, View, Button, Dimensions } from 'react-native';
-import Series from '../Series.json';
+import { StyleSheet, View, Button, Dimensions, ActivityIndicator } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Card from '../components/Card';
 import { SearchBar } from 'react-native-elements';
-import { setField } from '../actions';
-
-// import sideBar from './components/sideBar'
-
-
-export default class SeriesPage extends React.Component{
-    constructor(){
-        super();
-            state = {
+import  {connect } from 'react-redux';
+import { watchSeries } from '../actions/';
+class SeriesPage extends React.Component{
+    constructor(props){
+        super(props);
+            this.state = {
                 search: '',
             }}
 
     updateSearch = search => {
-        this.setState({ search });
-        value => setField( 'title',value);
+        this.setState({ search: search });
         };
+    
+    componentDidMount(){
+        this.props.watchSeries();
+    }
 
     render(){
-        const { search } = state;
-            
+        const { series, navigation, search } = this.props;
+        if (!series){
+            return <ActivityIndicator/>
+        }
         return(
         <View style = {styles.container}>
              <SearchBar buttonContainer = {styles.favoritos}
@@ -33,12 +34,12 @@ export default class SeriesPage extends React.Component{
                     value={search}
                     />
                 
-            <FlatList
-                data = { Series }
+            <FlatList 
+                data = {[...series ]}
                 renderItem={({ item, index }) => (
                 <View>
                     <Card serie ={item} 
-                    onNavigate = {() => props.navigation.navigate('SerieDetail', { serie: item })}
+                    onNavigate = {() => navigation.navigate('SerieDetail', { serie: item })}
                     />
                 </View>
                 )}
@@ -49,12 +50,12 @@ export default class SeriesPage extends React.Component{
             
             <View style = {styles.buttonContainer}>
                     <Button 
-                        onPress={() => this.props.navigation.navigate('createSerie')}
+                        onPress={() => navigation.navigate('createSerie')}
                         title='ADD Série'
                         color="grey"
                     />
                     <Button 
-                        onPress={() => this.props.navigation.navigate('Favorite')}
+                        onPress={() => navigation.navigate('Favorite')}
                         title='Favoritos'
                         color="grey"
                     />
@@ -77,3 +78,18 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width *2/3, 
     }
 })
+
+const mapStatToProp = state =>{
+    const { series } = state;
+    
+    if( !series )
+        return { series}
+
+    const keys = Object.keys(series);
+    const serieWithKeys = keys.map(id => {  
+        return { ...series[id], id }
+    }) 
+    return { series: serieWithKeys };
+}
+
+export default connect (mapStatToProp, { watchSeries })(SeriesPage);

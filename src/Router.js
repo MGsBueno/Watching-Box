@@ -33,7 +33,7 @@ const AppNavigator = createStackNavigator({
   'Subscribe':{
     screen: SubscribeScreen,
     navigationOptions: {
-      title: 'cadastro',
+      title: 'Cadastro',
       headerTintColor : 'white',
       headerStyle: {
         backgroundColor: '#9400D3',
@@ -64,8 +64,15 @@ const AppNavigator = createStackNavigator({
   },
   'createSerie':{
     screen:createSerie,
-    navigationOptions:{
-      title: 'Criar série',
+    navigationOptions: ({navigation}) =>{
+      if ( navigation.state.params && navigation.state.params.serieToEdit){
+        return {
+          title: navigation.state.params.serieToEdit.title
+        }
+      } 
+      return{ 
+        title: 'Criar série',
+      }
     }
   },
 },

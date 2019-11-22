@@ -10,7 +10,7 @@ import {
     Alert,
 } from 'react-native';
 import FormRow from '../components/FormRow';
-import { setField, saveSerie } from '../actions';
+import { setField, saveSerie, setWholeSerie, resetForm } from '../actions';
 import { connect } from 'react-redux';
 
 
@@ -22,11 +22,21 @@ class serieFormPage extends React.Component{
         }
     }
 
+    componentDidMount(){
+        const  { navigation, setWholeSerie, resetForm} = this.props;
+        const { params } = navigation.state;
+        if (params && params.serieToEdit){
+             return setWholeSerie(params.serieToEdit);
+        } return resetForm();
+        }
+    
+
     renderButton(){
         if(this.state.isLoading) 
             return <ActivityIndicator/>
         
-        return <Button
+        return (
+        <Button
         title= 'salvar'
         color = 'grey'
         onPress = {async () => {
@@ -41,15 +51,14 @@ class serieFormPage extends React.Component{
             }finally{
                 this.setState({isLoading: false})   
             }
-        }}
-    />
+        }}/>
+        )
     }
     
     render(){
         const {createSerie,
             setField, 
-            saveSerie,
-           navigation } = this.props;
+            } = this.props;
         
         return(
             <View>
@@ -130,7 +139,9 @@ function mapStateToProps(state){
 }
 mapDispatchtoProps = {
     setField,
-    saveSerie
+    saveSerie,
+    setWholeSerie,
+    resetForm,
     
 }
 export default connect(mapStateToProps, mapDispatchtoProps)(serieFormPage); 

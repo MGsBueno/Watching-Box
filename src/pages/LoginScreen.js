@@ -6,6 +6,7 @@ import {
     Button, 
     StyleSheet, 
     ActivityIndicator,
+    Image,
 } from 'react-native';
 import firebase from '../components/configuations'
 import { tryLogin } from '../actions';
@@ -55,8 +56,8 @@ class LoginPage extends React.Component {
     }
 
     renderSubscribeButton(){
-        if(this.isLoading){
-            return <ActivityIndicator/>
+        if(this.state.isLoading){
+            return null
         }
         return(<Button
             title = "Novo por aqui? Se inscreva"
@@ -80,6 +81,13 @@ class LoginPage extends React.Component {
         return (
             <View style={styles.container}>
                 {/*user login*/}
+               <View style={styles.logoView}>
+                <Image syle= {styles.logo}
+                style={styles.logo}
+                source={require('../images/test.png')}
+                />
+               </View>
+               
                <FormRow first>
                     <TextInput 
                     style={styles.input}
@@ -102,11 +110,13 @@ class LoginPage extends React.Component {
                     secureTextEntry
                     />
                 </FormRow>
-                <View style = {styles.button}>
+                <View style = { styles.button}> 
                     { this.renderLoginButton() }
-                    { this.renderSubscribeButton()}
-                    
                 </View>
+                <View style = { styles.button}>
+                    { this.renderSubscribeButton()}
+                </View>
+                
                 { this.renderMessage() }
             </View>
         )
@@ -123,6 +133,24 @@ export const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 5,
         paddingBottom: 5,
+    },
+    button:{
+        marginBottom: 10
+    },
+    logoView:{
+        
+        paddingTop:40,
+        paddingLeft:85,
+        alignContent:'center'
+        
+    },
+    logo:{
+        
+        width: 220,
+        height: 160,
+        aspectRatio:1,
+        resizeMode:'contain'
+        
     },
 })
 

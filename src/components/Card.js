@@ -14,12 +14,12 @@ const Card = ({ serie, onNavigate }) => (
     style = {styles.container}>
         <View style = {styles.card}>
             <Image style = {styles.card}
-                source = {{
-                    uri:serie.img
-                }}
-                aspectRatio={1}
-                resizeMode = 'stretch'
-            />
+                    source = {{
+                        uri:serie.img
+                    }}
+                    aspectRatio={1}
+                    resizeMode = 'stretch'
+                />
         </View>
     </TouchableOpacity>
 );

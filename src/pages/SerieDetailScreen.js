@@ -1,8 +1,18 @@
 import React from 'react';
-import { ScrollView, Text, Image, StyleSheet, TouchableHighlight, View } from 'react-native';
+import { 
+    ScrollView, 
+    Text, 
+    Image, 
+    StyleSheet, 
+    TouchableHighlight, 
+    View, 
+    Alert,
+    Button,
+ } from 'react-native';
 import Row from '../components/Row';
 import LongText from '../components/LongText';
-import saveSerie from '../actions'
+import { setField, saveSerie } from '../actions';
+import { connect } from 'react-redux'; 
 
 class SerieDetailPage extends React.Component {
     constructor(props){
@@ -11,33 +21,38 @@ class SerieDetailPage extends React.Component {
             FavoritedMsg: 'ADD Favoritos',
     }}
    
-    changeState = () =>{
-        /* TODA A LOGICA DE ADD SERIE AO FAVORITOS AQUI */
+    
 
+
+    changeState = /* TODA A LOGICA DE ADD SERIE AO FAVORITOS AQUI */
+    () => {
+        
         if(this.state.FavoritedMsg =='ADD Favoritos'){
-            this.setState({
-            FavoritedMsg : 'Favorito',
-            saveSerie   
-        });
+                const { navigation } = this.props;
+                const { serie } = this.props.navigation.state.params;
+                navigation.navigate('createSerie', { serieToEdit: serie})
+                this.setState({FavoritedMsg : 'Favorito'});
         }
         else{
-        this.setState({
-            FavoritedMsg : 'ADD Favoritos'
-        });
-        } 
+            this.setState({ FavoritedMsg : 'ADD Favoritos' });
+        }
     }   
 
     render(){
+        
         const { serie } = this.props.navigation.state.params;
         return(
                 <ScrollView>
-                    <Image
+                {
+                    serie.img
+                    ?   <Image
                     style={styles.image} 
                     source={{
                         uri: serie.img
                     }}
                     />
-                    
+                    : null
+                }
                 
                 <TouchableHighlight onPress={ this.changeState }>
                     <View style={
@@ -52,6 +67,7 @@ class SerieDetailPage extends React.Component {
                     <Row label='Gênero' content ={serie.gender}/>
                     <Row label='Nota' content ={serie.rate}/>
                     <LongText label='Descrição' content ={serie.description}/>
+                    
                 </ScrollView>
         )
     }
@@ -82,9 +98,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     }   
 });
-
-
-  
-
 
 export default SerieDetailPage;
