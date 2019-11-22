@@ -41,8 +41,7 @@ export const tryLogin = ({email, password}) => dispatch => {
     /* firebase rules */
     return firebase
         .auth()
-        // .signInWithEmailAndPassword(email, password)
-        .signInWithEmailAndPassword('maurobueno@id.uff.br','sa020493')
+        .signInWithEmailAndPassword(email, password)
         .then(user =>{
             const action = userLoginSucess(user);
             dispatch(action);

@@ -23,9 +23,9 @@ class SeriesPage extends React.Component{
 
     render(){
         const { series, navigation, search } = this.props;
-        if (!series){
-            return <ActivityIndicator/>
-        }
+        // if (!series){
+        //     return <ActivityIndicator/>
+        // }
         return(
         <View style = {styles.container}>
              <SearchBar buttonContainer = {styles.favoritos}
