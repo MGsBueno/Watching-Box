@@ -41,7 +41,8 @@ class LoginPage extends React.Component {
             .then( user =>{
                 if (user){
                 this.props.navigation.replace('Main');
-            }} )
+                }this.setState({ isLoading: false, message: '' })
+        })
     }
 
     renderLoginButton (){

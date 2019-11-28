@@ -56,8 +56,7 @@ export const watchSeries = () => {
             .on('value', snapshot => {
                 const series = snapshot.val();
                 const action = setSeries(series);
-                dispatch( action )
-                
+                dispatch( action )  
             })
     }
     

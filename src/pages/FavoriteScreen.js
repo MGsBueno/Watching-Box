@@ -43,11 +43,6 @@ class SeriesPage extends React.Component{
                         title='ADD Série'
                         color="grey"
                     />
-                    <Button 
-                        onPress={() => navigation.navigate('Favorite')}
-                        title='Favoritos'
-                        color="grey"
-                    />
                 </View>
         </View>
             )}
